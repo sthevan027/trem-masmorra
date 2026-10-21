@@ -27,12 +27,12 @@ namespace TremMasmorra.Game
         public void ShowTitle(Action onPlay, Action onQuit)
         {
             Ui.Clear(panel);
-            Ui.Stretch(panel, "Fundo", new Color(0.04f, 0.04f, 0.08f, 0.85f));
+            Ui.Stretch(panel, "Fundo", new Color(0.08f, 0.12f, 0.3f, 0.6f));
             var c = new Vector2(0.5f, 0.5f);
-            Ui.Label(panel, "TREM MASMORRA", 96, TextAnchor.MiddleCenter, new Color(1f, 0.85f, 0.4f), c, new Vector2(-600, 120), new Vector2(1200, 140));
-            Ui.Label(panel, "Um vagão. Um monstro. Mais um vagão...", 28, TextAnchor.MiddleCenter, Color.white, c, new Vector2(-600, 30), new Vector2(1200, 40));
-            Ui.Button(panel, "Jogar", c, new Vector2(-150, -60), new Vector2(300, 70), onPlay, 32);
-            Ui.Button(panel, "Sair", c, new Vector2(-150, -150), new Vector2(300, 70), onQuit, 32);
+            Ui.Label(panel, "TREM MASMORRA", 96, TextAnchor.MiddleCenter, new Color(1f, 0.85f, 0.4f), c, new Vector2(0, 120), new Vector2(1200, 140));
+            Ui.Label(panel, "Um vagão. Um monstro. Mais um vagão...", 28, TextAnchor.MiddleCenter, Color.white, c, new Vector2(0, 30), new Vector2(1200, 40));
+            Ui.Button(panel, "Jogar", c, new Vector2(0, -60), new Vector2(300, 70), onPlay, 32);
+            Ui.Button(panel, "Sair", c, new Vector2(0, -150), new Vector2(300, 70), onQuit, 32);
         }
 
         public void ShowCreator(CharacterLook look, Action onChanged, Action onStart)
@@ -73,9 +73,9 @@ namespace TremMasmorra.Game
             Ui.Clear(panel);
             Ui.Stretch(panel, "Fundo", new Color(0, 0, 0, 0.8f));
             var c = new Vector2(0.5f, 0.5f);
-            Ui.Label(panel, title, 90, TextAnchor.MiddleCenter, new Color(1f, 0.85f, 0.4f), c, new Vector2(-600, 80), new Vector2(1200, 120));
-            Ui.Label(panel, subtitle, 30, TextAnchor.MiddleCenter, Color.white, c, new Vector2(-600, -10), new Vector2(1200, 50));
-            Ui.Button(panel, buttonLabel, c, new Vector2(-170, -100), new Vector2(340, 70), onClick, 30);
+            Ui.Label(panel, title, 90, TextAnchor.MiddleCenter, new Color(1f, 0.85f, 0.4f), c, new Vector2(0, 80), new Vector2(1200, 120));
+            Ui.Label(panel, subtitle, 30, TextAnchor.MiddleCenter, Color.white, c, new Vector2(0, -10), new Vector2(1200, 50));
+            Ui.Button(panel, buttonLabel, c, new Vector2(0, -100), new Vector2(340, 70), onClick, 30);
         }
     }
 }

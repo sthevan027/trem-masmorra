@@ -23,7 +23,14 @@ namespace TremMasmorra.Game
                 Pitch = Mathf.Clamp(Pitch - Input.GetAxis("Mouse Y") * 2f, 5f, 55f);
             }
             var pivot = Target.position + Vector3.up * Height;
-            var pos = pivot + Quaternion.Euler(Pitch, Yaw, 0f) * new Vector3(0f, 0f, -Distance);
+            var back = Quaternion.Euler(Pitch, Yaw, 0f) * Vector3.back;
+            float dist = Distance;
+            // Encosta na parede mais proxima em vez de atravessa-la ou colar no personagem.
+            if (Physics.SphereCast(pivot, 0.25f, back, out var hit, Distance, 1 << WagonBuilder.WorldLayer, QueryTriggerInteraction.Ignore))
+                dist = Mathf.Max(hit.distance, 0.4f);
+            var pos = pivot + back * dist;
+            // Sem espaco atras: sobe e olha de cima, mantendo o personagem visivel.
+            if (dist < Distance) pos.y += (Distance - dist) * 0.8f;
             pos = new Vector3(
                 Mathf.Clamp(pos.x, MinBounds.x, MaxBounds.x),
                 Mathf.Clamp(pos.y, MinBounds.y, MaxBounds.y),

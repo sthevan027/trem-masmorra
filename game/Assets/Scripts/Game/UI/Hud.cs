@@ -92,11 +92,11 @@ namespace TremMasmorra.Game
             {
                 float x = (i - (HotbarSlots - 1) / 2f) * 72f;
                 var anchor = new Vector2(0.5f, 0f);
-                var frame = Ui.Box(transform, "Slot" + i, new Color(0.15f, 0.15f, 0.18f, 0.9f), anchor, new Vector2(x - 28, 30), new Vector2(56, 56));
+                var frame = Ui.Box(transform, "Slot" + i, new Color(0.15f, 0.15f, 0.18f, 0.9f), anchor, new Vector2(x, 30), new Vector2(56, 56));
                 var label = Ui.Label(frame.transform, "", 13, TextAnchor.MiddleCenter, Color.white, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(54, 54));
                 label.rectTransform.pivot = new Vector2(0.5f, 0.5f);
                 label.rectTransform.anchoredPosition = Vector2.zero;
-                var back = Ui.FillBar(transform, "Dur" + i, new Color(0, 0, 0, 0.8f), Color.green, anchor, new Vector2(x - 28, 22), new Vector2(56, 6), out var fill);
+                var back = Ui.FillBar(transform, "Dur" + i, new Color(0, 0, 0, 0.8f), Color.green, anchor, new Vector2(x, 22), new Vector2(56, 6), out var fill);
                 slots.Add(new Slot { Frame = frame, Label = label, Bar = fill, BarBack = back });
             }
 
@@ -118,7 +118,7 @@ namespace TremMasmorra.Game
                 else abilityBoxes[keys[i][0]] = new AbilityBox { Name = name, Cooldown = cd };
             }
 
-            toast = Ui.Label(transform, "", 24, TextAnchor.MiddleCenter, new Color(1f, 0.9f, 0.4f), new Vector2(0.5f, 0), new Vector2(-300, 110), new Vector2(600, 40));
+            toast = Ui.Label(transform, "", 24, TextAnchor.MiddleCenter, new Color(1f, 0.9f, 0.4f), new Vector2(0.5f, 0), new Vector2(0, 110), new Vector2(600, 40));
         }
 
         void Update()

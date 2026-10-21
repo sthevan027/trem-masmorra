@@ -19,6 +19,7 @@ namespace TremMasmorra.Game
         public bool IsBoss;
         public bool Ranged;
         public BossPattern Pattern;
+        public int Variant;
     }
 
     public static class EnemyCatalog
@@ -26,40 +27,40 @@ namespace TremMasmorra.Game
         public static readonly EnemyDef FormigaCristal = new EnemyDef
         {
             Name = "Formiga de Cristal", MaxHp = 40, Speed = 3.2f, Damage = 8, AttackRange = 1.8f, AttackCooldown = 1.2f,
-            Body = new Color(0.35f, 0.7f, 0.95f), Accent = new Color(0.7f, 0.9f, 1f), Scale = 0.9f,
+            Body = new Color(0.35f, 0.7f, 0.95f), Accent = new Color(0.7f, 0.9f, 1f), Scale = 0.9f, Variant = 2,
         };
 
         public static readonly EnemyDef MonstroDeLama = new EnemyDef
         {
             Name = "Monstro de Lama", MaxHp = 65, Speed = 2.2f, Damage = 12, AttackRange = 2f, AttackCooldown = 1.6f,
-            Body = new Color(0.45f, 0.32f, 0.2f), Accent = new Color(0.3f, 0.2f, 0.1f), Scale = 1.1f,
+            Body = new Color(0.62f, 0.45f, 0.28f), Accent = new Color(0.45f, 0.3f, 0.18f), Scale = 1.1f, Variant = 0,
         };
 
         public static readonly EnemyDef Bruxo = new EnemyDef
         {
             Name = "Lodo Arremessador", MaxHp = 45, Speed = 2f, Damage = 9, AttackRange = 11f, AttackCooldown = 2f,
-            Body = new Color(0.4f, 0.55f, 0.25f), Accent = new Color(0.6f, 0.8f, 0.3f), Scale = 1f, Ranged = true,
+            Body = new Color(0.45f, 0.75f, 0.3f), Accent = new Color(0.7f, 0.95f, 0.35f), Scale = 1f, Ranged = true, Variant = 1,
         };
 
         public static readonly EnemyDef GuerreiroGeode = new EnemyDef
         {
             Name = "Guerreiro Geode", MaxHp = 300, Speed = 2.6f, Damage = 18, AttackRange = 3f, AttackCooldown = 2.5f,
             Body = new Color(0.55f, 0.3f, 0.7f), Accent = new Color(0.85f, 0.6f, 1f), Scale = 2f,
-            IsBoss = true, Pattern = BossPattern.Slam,
+            IsBoss = true, Pattern = BossPattern.Slam, Variant = 0,
         };
 
         public static readonly EnemyDef ReiFormiga = new EnemyDef
         {
             Name = "Rainha dos Cristais", MaxHp = 450, Speed = 2.4f, Damage = 14, AttackRange = 12f, AttackCooldown = 2.2f,
             Body = new Color(0.2f, 0.55f, 0.85f), Accent = new Color(0.9f, 0.95f, 1f), Scale = 2.2f,
-            IsBoss = true, Ranged = true, Pattern = BossPattern.Volley,
+            IsBoss = true, Ranged = true, Pattern = BossPattern.Volley, Variant = 2,
         };
 
         public static readonly EnemyDef Maquinista = new EnemyDef
         {
             Name = "O Maquinista do Trem", MaxHp = 650, Speed = 3f, Damage = 22, AttackRange = 3.2f, AttackCooldown = 3f,
             Body = new Color(0.75f, 0.2f, 0.2f), Accent = new Color(0.95f, 0.8f, 0.3f), Scale = 2.4f,
-            IsBoss = true, Pattern = BossPattern.ChargeSlam,
+            IsBoss = true, Pattern = BossPattern.ChargeSlam, Variant = 1,
         };
 
         public static readonly EnemyDef[] Common = { FormigaCristal, MonstroDeLama, Bruxo };
@@ -77,6 +78,7 @@ namespace TremMasmorra.Game
 
         PlayerController player;
         CharacterController cc;
+        GameObject shadow;
         float nextAttack;
         float chargeUntil;
         Vector3 chargeDir;
@@ -96,8 +98,9 @@ namespace TremMasmorra.Game
             enemy.cc = cc;
             enemy.Health = go.GetComponent<Health>();
             enemy.Health.Init(def.MaxHp);
-            enemy.Anim = ProceduralModels.Creature(def.Body, def.Accent, def.Scale);
+            enemy.Anim = ProceduralModels.Creature(def.Body, def.Accent, def.Scale, def.Variant, def.IsBoss);
             enemy.Anim.transform.SetParent(go.transform, false);
+            enemy.shadow = ProceduralModels.BlobShadow(go.transform, 0.8f * def.Scale);
             enemy.Health.Died += enemy.OnDied;
             enemy.nextAttack = Time.time + 1f;
             return enemy;
@@ -191,6 +194,7 @@ namespace TremMasmorra.Game
             Anim.PlayDeath();
             Anim.MoveSpeed = 0f;
             cc.enabled = false;
+            if (shadow != null) shadow.SetActive(false);
             Killed?.Invoke(this);
             Destroy(gameObject, 2f);
         }

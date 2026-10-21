@@ -57,6 +57,7 @@ namespace TremMasmorra.Game
             Health = GetComponent<Health>();
             Health.Init(100);
             anim.transform.SetParent(transform, false);
+            ProceduralModels.BlobShadow(transform, 0.55f);
         }
 
         void Awake()

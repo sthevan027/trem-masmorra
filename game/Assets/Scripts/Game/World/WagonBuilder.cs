@@ -8,7 +8,7 @@ namespace TremMasmorra.Game
         public GameObject Root;
         public GameObject Door;
         public List<Vector3> SpawnPoints = new List<Vector3>();
-        public Vector3 PlayerStart = new Vector3(0f, 0.1f, 2.5f);
+        public Vector3 PlayerStart = new Vector3(0f, 0.1f, 6.5f);
     }
 
     public static class WagonBuilder
@@ -17,19 +17,20 @@ namespace TremMasmorra.Game
         public const float Height = 5f;
         public const float Length = 40f;
         public const float ExitZ = 38.8f;
+        public const int WorldLayer = 8; // paredes, chao e caixotes: a camera colide so com isso
 
         public static WagonData Build(int wagon, bool boss, System.Random rng)
         {
             var data = new WagonData { Root = new GameObject("Vagão " + wagon) };
             var t = data.Root.transform;
 
-            float hue = (wagon * 0.11f) % 1f;
-            Color wall = Color.HSVToRGB(hue, boss ? 0.55f : 0.25f, boss ? 0.45f : 0.5f);
-            Color floor = Color.HSVToRGB(hue, 0.2f, 0.25f);
-            Color trim = Color.HSVToRGB(hue, 0.5f, 0.75f);
+            float hue = boss ? 0.02f : (wagon * 0.11f) % 1f;
+            Color wall = Color.HSVToRGB(hue, boss ? 0.6f : 0.4f, boss ? 0.8f : 0.92f);
+            Color floor = Color.HSVToRGB((hue + 0.08f) % 1f, 0.35f, 0.62f);
+            Color trim = Color.HSVToRGB((hue + 0.5f) % 1f, 0.55f, 0.98f);
 
             Solid(t, new Vector3(0, -0.25f, Length / 2), new Vector3(Width, 0.5f, Length), floor, "Chao");
-            Solid(t, new Vector3(0, Height + 0.25f, Length / 2), new Vector3(Width, 0.5f, Length), wall * 0.7f, "Teto");
+            Solid(t, new Vector3(0, Height + 0.25f, Length / 2), new Vector3(Width, 0.5f, Length), wall * 0.85f, "Teto");
             Solid(t, new Vector3(-Width / 2 - 0.25f, Height / 2, Length / 2), new Vector3(0.5f, Height, Length), wall, "ParedeE");
             Solid(t, new Vector3(Width / 2 + 0.25f, Height / 2, Length / 2), new Vector3(0.5f, Height, Length), wall, "ParedeD");
             Solid(t, new Vector3(0, Height / 2, -0.25f), new Vector3(Width, Height, 0.5f), wall, "ParedeTras");
@@ -69,7 +70,6 @@ namespace TremMasmorra.Game
             var sign = new GameObject("Placa");
             sign.transform.SetParent(t, false);
             sign.transform.localPosition = new Vector3(0, Height - 1.2f, Length - 0.2f);
-            sign.transform.localRotation = Quaternion.Euler(0, 180f, 0);
             var text = sign.AddComponent<TextMesh>();
             text.text = boss ? "BOSS  -  VAGÃO " + wagon : "VAGÃO " + wagon;
             text.characterSize = 0.25f;
@@ -79,7 +79,7 @@ namespace TremMasmorra.Game
             sign.GetComponent<MeshRenderer>().sharedMaterial = Ui.Font.material;
 
             for (int i = 0; i < 12; i++)
-                data.SpawnPoints.Add(new Vector3((float)(rng.NextDouble() * 9 - 4.5), 0.1f, (float)(rng.NextDouble() * 20 + 13)));
+                data.SpawnPoints.Add(new Vector3((float)(rng.NextDouble() * 9 - 4.5), 0.1f, (float)(rng.NextDouble() * 18 + 16)));
             return data;
         }
 
@@ -95,7 +95,8 @@ namespace TremMasmorra.Game
             go.transform.SetParent(parent, false);
             go.transform.localPosition = pos;
             go.transform.localScale = size;
-            go.GetComponent<Renderer>().sharedMaterial = ProceduralModels.Mat(c);
+            go.GetComponent<Renderer>().sharedMaterial = ProceduralModels.Mat(c, ProceduralModels.WorldOutline);
+            go.layer = WorldLayer;
             return go;
         }
 

@@ -60,9 +60,9 @@ namespace TremMasmorra.Game
             cards.Clear(); faces.Clear(); backs.Clear();
 
             Ui.Label(root, "O BOSS CAIU!  Escolha uma carta", 36, TextAnchor.UpperCenter, Color.white,
-                new Vector2(0.5f, 1f), new Vector2(-400, -60), new Vector2(800, 50));
+                new Vector2(0.5f, 1f), new Vector2(0, -60), new Vector2(800, 50));
             message = Ui.Label(root, "", 24, TextAnchor.MiddleCenter, new Color(1f, 0.85f, 0.4f),
-                new Vector2(0.5f, 0f), new Vector2(-450, 80), new Vector2(900, 40));
+                new Vector2(0.5f, 0f), new Vector2(0, 80), new Vector2(900, 40));
 
             for (int i = 0; i < offer.Cards.Length; i++) BuildCard(i);
             SetPhase(Phase.Stacked);
@@ -169,15 +169,15 @@ namespace TremMasmorra.Game
             if (card.IsAbility)
             {
                 message.text = "Q e E ocupados. Qual habilidade substituir?";
-                Ui.Button(root, "Substituir Q", new Vector2(0.5f, 0f), new Vector2(-220, 150), new Vector2(200, 50),
+                Ui.Button(root, "Substituir Q", new Vector2(0.5f, 0f), new Vector2(-120, 150), new Vector2(200, 50),
                     () => { loadout.SetAbility('Q', card.AbilityId); Finish(); });
-                Ui.Button(root, "Substituir E", new Vector2(0.5f, 0f), new Vector2(20, 150), new Vector2(200, 50),
+                Ui.Button(root, "Substituir E", new Vector2(0.5f, 0f), new Vector2(120, 150), new Vector2(200, 50),
                     () => { loadout.SetAbility('E', card.AbilityId); Finish(); });
             }
             else
             {
                 message.text = "Mochila cheia. Descarte o item mais gasto para ficar com este?";
-                Ui.Button(root, "Descartar o mais gasto", new Vector2(0.5f, 0f), new Vector2(-150, 150), new Vector2(300, 50), () =>
+                Ui.Button(root, "Descartar o mais gasto", new Vector2(0.5f, 0f), new Vector2(0, 150), new Vector2(300, 50), () =>
                 {
                     var worst = loadout.Backpack.OrderBy(i => i.Durability).First();
                     loadout.Discard(worst);

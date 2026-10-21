@@ -61,7 +61,7 @@ namespace TremMasmorra.Game
             camGo.tag = "MainCamera";
             cam = camGo.GetComponent<Camera>();
             cam.clearFlags = CameraClearFlags.SolidColor;
-            cam.backgroundColor = new Color(0.05f, 0.05f, 0.08f);
+            cam.backgroundColor = new Color(0.47f, 0.78f, 0.96f);
             cam.fieldOfView = 65f;
             follow = camGo.AddComponent<ThirdPersonCamera>();
             follow.enabled = false;
