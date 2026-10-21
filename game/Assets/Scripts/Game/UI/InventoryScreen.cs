@@ -39,6 +39,8 @@ namespace TremMasmorra.Game
             content.gameObject.SetActive(false);
             PlayerController.InputBlocked = false;
             Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         public void Open()
@@ -47,6 +49,8 @@ namespace TremMasmorra.Game
             content.gameObject.SetActive(true);
             PlayerController.InputBlocked = true;
             Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             Redraw();
         }
 

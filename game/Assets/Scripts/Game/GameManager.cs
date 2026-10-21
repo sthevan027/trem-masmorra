@@ -93,6 +93,7 @@ namespace TremMasmorra.Game
             ClearWorld();
             hud.gameObject.SetActive(false);
             inventory.Close();
+            cards.Hide();
             Time.timeScale = 1f;
             PlayerController.InputBlocked = true;
             Cursor.lockState = CursorLockMode.None;
@@ -136,6 +137,7 @@ namespace TremMasmorra.Game
         public void StartRun()
         {
             ClearWorld();
+            cards.Hide();
             menus.Hide();
             State = GameState.Playing;
             rng = new System.Random();
@@ -149,7 +151,8 @@ namespace TremMasmorra.Game
 
             var playerGo = new GameObject("Jogador", typeof(CharacterController), typeof(Health));
             var cc = playerGo.GetComponent<CharacterController>();
-            cc.height = 1.8f * Look.Height;
+            // A altura do personagem e so visual: o corpo de colisao e sempre o mesmo.
+            cc.height = 1.8f;
             cc.radius = 0.4f;
             cc.center = new Vector3(0, cc.height / 2f, 0);
             Player = playerGo.AddComponent<PlayerController>();
@@ -213,6 +216,8 @@ namespace TremMasmorra.Game
         void OnEnemyKilled(Enemy enemy)
         {
             alive.Remove(enemy);
+            // Um golpe que ja estava no ar pode matar um inimigo depois da morte do jogador.
+            if (State != GameState.Playing) return;
             Run.OnMonsterKilled();
 
             if (enemy.Def.IsBoss)

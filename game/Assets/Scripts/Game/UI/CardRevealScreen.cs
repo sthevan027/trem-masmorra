@@ -186,6 +186,12 @@ namespace TremMasmorra.Game
             }
         }
 
+        /// <summary>Fecha a tela sem aplicar nada (a run acabou ou recomecou).</summary>
+        public void Hide()
+        {
+            if (root != null) root.gameObject.SetActive(false);
+        }
+
         void Finish()
         {
             root.gameObject.SetActive(false);

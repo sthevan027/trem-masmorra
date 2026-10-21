@@ -140,7 +140,8 @@ namespace TremMasmorra.Game
         void Attack(Vector3 dir, float dist)
         {
             Anim.PlayAttack();
-            Vector3 muzzle = transform.position + Vector3.up * (1.2f * Def.Scale) + dir * 0.8f;
+            // Os projeteis saem na altura do peito do jogador, qualquer que seja o tamanho do inimigo.
+            Vector3 muzzle = transform.position + Vector3.up * 1.2f + dir * 0.8f;
             switch (Def.Pattern)
             {
                 case BossPattern.Slam:
