@@ -10,6 +10,8 @@ LOG="$ROOT/.superpowers/test-$PLATFORM.log"
 if [ -z "${GRAPHICS:-}" ]; then NG="-nographics"; else NG=""; fi
 ARGS=(-batchmode $NG -projectPath "$ROOT/game" -runTests -testPlatform "$PLATFORM" -testResults "$RESULTS" -logFile "$LOG")
 [ -n "$FILTER" ] && ARGS+=(-testFilter "$FILTER")
+# Testes visuais precisam de GPU: so rodam com GRAPHICS=1.
+[ -z "${GRAPHICS:-}" ] && ARGS+=(-testCategory "!Visual")
 "$UNITY" "${ARGS[@]}"
 CODE=$?
 grep -o 'total="[0-9]*" passed="[0-9]*" failed="[0-9]*"' "$RESULTS" | head -1
