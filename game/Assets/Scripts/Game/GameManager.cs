@@ -15,7 +15,7 @@ namespace TremMasmorra.Game
 {
     public enum GameState { Title, Creator, Playing, Dead, Victory }
 
-    /// <summary>Orquestra o fluxo: tela inicial, criacao, trem de 9 vagoes, morte e vitoria.</summary>
+    /// <summary>Orquestra o fluxo: tela inicial, criacao, trem de 9 vagões, morte e vitoria.</summary>
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
@@ -26,6 +26,8 @@ namespace TremMasmorra.Game
         public PlayerController Player { get; private set; }
         public CharacterLook Look { get; } = new CharacterLook();
 
+        public Camera Cam => cam;
+        public Canvas Canvas { get; private set; }
         Camera cam;
         ThirdPersonCamera follow;
         Menus menus;
@@ -66,6 +68,7 @@ namespace TremMasmorra.Game
 
             var canvasGo = new GameObject("Canvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
             var canvas = canvasGo.GetComponent<Canvas>();
+            Canvas = canvas;
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             var scaler = canvasGo.GetComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
@@ -204,7 +207,7 @@ namespace TremMasmorra.Game
                 alive.Add(enemy);
                 if (defs[i].IsBoss) { currentBoss = enemy; hud.SetBoss(enemy); }
             }
-            hud.ShowToast(boss ? "Boss do vagao " + Run.Wagon + "!" : "Vagao " + Run.Wagon + ": derrote os monstros");
+            hud.ShowToast(boss ? "Boss do vagão " + Run.Wagon + "!" : "Vagão " + Run.Wagon + ": derrote os monstros");
         }
 
         void OnEnemyKilled(Enemy enemy)
@@ -270,7 +273,7 @@ namespace TremMasmorra.Game
             PlayerController.InputBlocked = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            menus.ShowEnd("VOCE MORREU", "Vagao " + Run.Wagon + " de " + RunState.TotalWagons, "Recomecar do vagao 1", StartRun);
+            menus.ShowEnd("VOCÊ MORREU", "Vagão " + Run.Wagon + " de " + RunState.TotalWagons, "Recomecar do vagão 1", StartRun);
         }
 
         void OnVictory()
@@ -279,7 +282,7 @@ namespace TremMasmorra.Game
             PlayerController.InputBlocked = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            menus.ShowEnd("VITORIA!", "Voce atravessou os 9 vagoes do Trem Masmorra.", "Voltar ao inicio", ShowTitle);
+            menus.ShowEnd("VITÓRIA!", "Você atravessou os 9 vagões do Trem Masmorra.", "Voltar ao início", ShowTitle);
         }
 
         /// <summary>Remove tudo de uma run anterior para que nada vaze para a proxima.</summary>

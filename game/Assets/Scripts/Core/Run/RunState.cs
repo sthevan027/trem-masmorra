@@ -31,7 +31,7 @@ namespace TremMasmorra.Core.Run
 
         public void NextWagon()
         {
-            if (!DoorOpen) throw new InvalidOperationException("A porta do vagao ainda esta fechada.");
+            if (!DoorOpen) throw new InvalidOperationException("A porta do vagão ainda esta fechada.");
             if (Wagon >= TotalWagons) { Victory = true; return; }
             Wagon++;
             DoorOpen = false;

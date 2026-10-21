@@ -61,11 +61,11 @@ namespace TremMasmorra.Game
         {
             Ui.Clear(content);
             var tl = new Vector2(0, 1);
-            Ui.Label(content, "INVENTARIO   (Tab para fechar)", 34, TextAnchor.UpperLeft, Color.white, tl, new Vector2(60, -30), new Vector2(900, 50));
+            Ui.Label(content, "INVENTÁRIO   (Tab para fechar)", 34, TextAnchor.UpperLeft, Color.white, tl, new Vector2(60, -30), new Vector2(900, 50));
 
             // Armadura + personagem.
             Ui.Label(content, "Armadura", 24, TextAnchor.UpperLeft, Color.white, tl, new Vector2(60, -100), new Vector2(300, 30));
-            string[] names = { "Cabeca", "Peitoral", "Bracos", "Pernas" };
+            string[] names = { "Cabeça", "Peitoral", "Braços", "Pernas" };
             for (int i = 0; i < 4; i++)
                 ItemButton(loadout.Armor[i], names[i], tl, new Vector2(60, -140 - i * 100));
             Ui.Box(content, "Personagem", new Color(0.3f, 0.5f, 0.8f, 0.8f), tl, new Vector2(190, -140), new Vector2(150, 370));
@@ -81,10 +81,10 @@ namespace TremMasmorra.Game
             }
 
             // Em uso.
-            Ui.Label(content, "Em uso (maximo " + loadout.MaxInUse + ")", 24, TextAnchor.UpperLeft, Color.white, tl, new Vector2(420, -560), new Vector2(400, 30));
+            Ui.Label(content, "Em uso (máximo " + loadout.MaxInUse + ")", 24, TextAnchor.UpperLeft, Color.white, tl, new Vector2(420, -560), new Vector2(400, 30));
             for (int i = 0; i < loadout.MaxInUse; i++)
                 ItemButton(i < loadout.InUse.Count ? loadout.InUse[i] : null, "", tl, new Vector2(420 + i * 100, -600));
-            Ui.Label(content, "Braco extra", 20, TextAnchor.UpperLeft, Color.white, tl, new Vector2(760, -560), new Vector2(200, 30));
+            Ui.Label(content, "Braço extra", 20, TextAnchor.UpperLeft, Color.white, tl, new Vector2(760, -560), new Vector2(200, 30));
             ItemButton(loadout.ExtraArm, "", tl, new Vector2(760, -600));
 
             // Habilidades.
@@ -104,7 +104,7 @@ namespace TremMasmorra.Game
             bool inBackpack = loadout.Backpack.Contains(selected);
             if (inBackpack)
             {
-                string label = IsHand(selected.Kind) ? "Usar na mao" : selected.Kind == ItemKind.ExtraArm ? "Equipar braco" : IsArmor(selected.Kind) ? "Vestir" : null;
+                string label = IsHand(selected.Kind) ? "Usar na mão" : selected.Kind == ItemKind.ExtraArm ? "Equipar braço" : IsArmor(selected.Kind) ? "Vestir" : null;
                 if (label != null) Action(label, anchor, ref y, Equip);
                 if (selected.AbilityId != null)
                 {

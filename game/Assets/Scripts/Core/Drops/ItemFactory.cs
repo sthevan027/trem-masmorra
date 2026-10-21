@@ -24,7 +24,7 @@ namespace TremMasmorra.Core.Drops
                 case ItemKind.ArmorChest: return "Peitoral";
                 case ItemKind.ArmorArms: return "Braceletes";
                 case ItemKind.ArmorLegs: return "Grevas";
-                case ItemKind.ExtraArm: return "Braco Mecanico";
+                case ItemKind.ExtraArm: return "Braço Mecânico";
                 default: return "Capa da Invisibilidade";
             }
         }

@@ -80,10 +80,10 @@ namespace TremMasmorra.Game
             bossRoot = bossGo.gameObject;
             bossName = Ui.Label(bossRoot.transform, "", 24, TextAnchor.LowerLeft, Color.white, new Vector2(0, 1), new Vector2(0, 2), new Vector2(600, 32));
             var bossBack = Ui.Stretch(bossRoot.transform, "FundoBoss", new Color(0.1f, 0.05f, 0.05f, 0.9f));
-            bossBack.rectTransform.offsetMax = new Vector2(0, -34);
-            bossBack.rectTransform.offsetMin = new Vector2(0, 0);
             bossBack.rectTransform.anchorMin = new Vector2(0, 0);
             bossBack.rectTransform.anchorMax = new Vector2(1, 0.5f);
+            bossBack.rectTransform.offsetMin = Vector2.zero;
+            bossBack.rectTransform.offsetMax = Vector2.zero;
             bossFill = Ui.Stretch(bossBack.transform, "VidaBoss", new Color(0.7f, 0.12f, 0.12f)).rectTransform;
             bossRoot.SetActive(false);
 
@@ -124,7 +124,7 @@ namespace TremMasmorra.Game
         void Update()
         {
             if (player == null || player.Loadout == null) return;
-            wagonLabel.text = "Vagao " + run.Wagon + " / " + RunState.TotalWagons + (run.IsBossWagon ? "   (BOSS)" : "");
+            wagonLabel.text = "Vagão " + run.Wagon + " / " + RunState.TotalWagons + (run.IsBossWagon ? "   (BOSS)" : "");
             Ui.SetFill(playerFill, player.Health.Fraction);
             playerLabel.text = player.Health.Current + " / " + player.Health.Max;
 

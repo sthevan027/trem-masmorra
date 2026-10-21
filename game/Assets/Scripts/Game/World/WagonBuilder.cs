@@ -20,7 +20,7 @@ namespace TremMasmorra.Game
 
         public static WagonData Build(int wagon, bool boss, System.Random rng)
         {
-            var data = new WagonData { Root = new GameObject("Vagao " + wagon) };
+            var data = new WagonData { Root = new GameObject("Vagão " + wagon) };
             var t = data.Root.transform;
 
             float hue = (wagon * 0.11f) % 1f;
@@ -65,13 +65,13 @@ namespace TremMasmorra.Game
                 Solid(t, new Vector3(x, 0.6f, z), new Vector3(1.2f, 1.2f, 1.2f), trim * 0.6f, "Caixote");
             }
 
-            // Placa com o numero do vagao sobre a porta.
+            // Placa com o numero do vagão sobre a porta.
             var sign = new GameObject("Placa");
             sign.transform.SetParent(t, false);
             sign.transform.localPosition = new Vector3(0, Height - 1.2f, Length - 0.2f);
             sign.transform.localRotation = Quaternion.Euler(0, 180f, 0);
             var text = sign.AddComponent<TextMesh>();
-            text.text = boss ? "BOSS  -  VAGAO " + wagon : "VAGAO " + wagon;
+            text.text = boss ? "BOSS  -  VAGÃO " + wagon : "VAGÃO " + wagon;
             text.characterSize = 0.25f;
             text.fontSize = 48;
             text.anchor = TextAnchor.MiddleCenter;

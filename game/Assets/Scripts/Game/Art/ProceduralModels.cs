@@ -51,7 +51,7 @@ namespace TremMasmorra.Game
             float bodyW = fem ? 0.5f : 0.62f;
 
             Part(PrimitiveType.Cube, model.transform, new Vector3(0, 1.1f, 0), new Vector3(bodyW, 0.8f, 0.3f), shirt, "Corpo");
-            Part(PrimitiveType.Sphere, model.transform, new Vector3(0, 1.75f, 0), new Vector3(0.42f, 0.45f, 0.42f), skin, "Cabeca");
+            Part(PrimitiveType.Sphere, model.transform, new Vector3(0, 1.75f, 0), new Vector3(0.42f, 0.45f, 0.42f), skin, "Cabeça");
             AddHair(model.transform, look.HairStyle, fem);
 
             var anim = model.AddComponent<SimpleAnimator>();
@@ -68,7 +68,7 @@ namespace TremMasmorra.Game
         {
             var model = new GameObject("Model");
             Part(PrimitiveType.Cube, model.transform, new Vector3(0, 1.0f, 0), new Vector3(0.9f, 0.9f, 0.6f), body, "Corpo");
-            Part(PrimitiveType.Cube, model.transform, new Vector3(0, 1.75f, 0.05f), new Vector3(0.6f, 0.5f, 0.55f), accent, "Cabeca");
+            Part(PrimitiveType.Cube, model.transform, new Vector3(0, 1.75f, 0.05f), new Vector3(0.6f, 0.5f, 0.55f), accent, "Cabeça");
             Part(PrimitiveType.Cube, model.transform, new Vector3(-0.15f, 1.8f, 0.34f), new Vector3(0.12f, 0.12f, 0.05f), Color.white, "OlhoE");
             Part(PrimitiveType.Cube, model.transform, new Vector3(0.15f, 1.8f, 0.34f), new Vector3(0.12f, 0.12f, 0.05f), Color.white, "OlhoD");
             var anim = model.AddComponent<SimpleAnimator>();

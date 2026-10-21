@@ -200,7 +200,7 @@ namespace TremMasmorra.Game
             s == CardStyle.Magia ? new Color(0.65f, 0.4f, 1f) : s == CardStyle.FisicoDistancia ? new Color(0.4f, 0.85f, 0.4f) : new Color(0.95f, 0.5f, 0.3f);
 
         static string StyleName(CardStyle s) =>
-            s == CardStyle.Magia ? "Magia" : s == CardStyle.FisicoDistancia ? "Fisico a distancia" : "Fisico corpo a corpo";
+            s == CardStyle.Magia ? "Magia" : s == CardStyle.FisicoDistancia ? "Físico a distância" : "Físico corpo a corpo";
 
         public static string FaceText(Card c)
         {
