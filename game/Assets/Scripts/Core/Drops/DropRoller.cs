@@ -31,7 +31,7 @@ namespace TremMasmorra.Core.Drops
         {
             var kind = CommonKinds[rng.Next(CommonKinds.Length)];
             int durability = rng.Next(5, CommonMaxDurability + 1);
-            return new Item(NameFor(kind, Rarity.Comum), Rarity.Comum, kind, durability);
+            return ItemFactory.Make(kind, Rarity.Comum, durability);
         }
 
         public Item[] RollBossItems(int wagon, int count)
@@ -45,16 +45,11 @@ namespace TremMasmorra.Core.Drops
         {
             var kind = BossKinds[rng.Next(BossKinds.Length)];
             if (wagon >= EpicMinWagon && rng.NextDouble() < EpicChance)
-                return new Item(NameFor(kind, Rarity.Epico), Rarity.Epico, kind, Item.MaxDurability);
+                return ItemFactory.Make(kind, Rarity.Epico, Item.MaxDurability);
 
             int durability = rng.NextDouble() < RareNewChance ? Item.MaxDurability : rng.Next(90, 100);
-            return new Item(NameFor(kind, Rarity.Raro), Rarity.Raro, kind, durability);
+            return ItemFactory.Make(kind, Rarity.Raro, durability);
         }
 
-        static string NameFor(ItemKind kind, Rarity rarity)
-        {
-            string prefix = rarity == Rarity.Comum ? "Gasto" : rarity == Rarity.Raro ? "Raro" : "Épico";
-            return $"{kind} ({prefix})";
-        }
     }
 }

@@ -47,6 +47,31 @@ namespace TremMasmorra.Core.Loadout
             return true;
         }
 
+        /// <summary>Guarda na mochila um item que esta em uso, vestido ou no braco extra.</summary>
+        public bool Stow(Item item)
+        {
+            if (backpack.Count >= BackpackCapacity) return false;
+            bool removed = inUse.Remove(item);
+            for (int i = 0; i < Armor.Length; i++)
+                if (Armor[i] == item) { Armor[i] = null; removed = true; }
+            if (ExtraArm == item)
+            {
+                ExtraArm = null;
+                removed = true;
+                while (inUse.Count > MaxInUse && backpack.Count < BackpackCapacity)
+                {
+                    var overflow = inUse[inUse.Count - 1];
+                    inUse.RemoveAt(inUse.Count - 1);
+                    backpack.Add(overflow);
+                }
+            }
+            if (!removed) return false;
+            backpack.Add(item);
+            return true;
+        }
+
+        public bool Discard(Item item) => backpack.Remove(item);
+
         public bool TryEquipExtraArm(Item item)
         {
             if (item.Kind != ItemKind.ExtraArm || !backpack.Contains(item)) return false;
