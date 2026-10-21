@@ -1,0 +1,9 @@
+{
+  "name": "TremMasmorra.PlayTests",
+  "rootNamespace": "TremMasmorra.PlayTests",
+  "references": ["TremMasmorra.Core", "TremMasmorra.Game", "UnityEngine.TestRunner", "UnityEditor.TestRunner", "Unity.ugui"],
+  "includePlatforms": [],
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"],
+  "defineConstraints": ["UNITY_INCLUDE_TESTS"]
+}

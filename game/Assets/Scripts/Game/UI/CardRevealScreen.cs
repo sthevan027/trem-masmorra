@@ -144,6 +144,14 @@ namespace TremMasmorra.Game
             }
         }
 
+        /// <summary>Pula a animacao e escolhe a carta (usado por testes e automacao).</summary>
+        public void ForcePick(int index)
+        {
+            phase = Phase.Choosing;
+            foreach (var c in cards) c.localScale = Vector3.one;
+            Choose(index);
+        }
+
         void Choose(int index)
         {
             if (phase != Phase.Choosing) return;

@@ -126,8 +126,8 @@ namespace TremMasmorra.Game
             }
 
             if (Input.GetMouseButton(0) && Time.time >= attackReady) Attack();
-            if (Input.GetKeyDown(KeyCode.Q)) TryCast('Q');
-            if (Input.GetKeyDown(KeyCode.E)) TryCast('E');
+            if (Input.GetKeyDown(KeyCode.Q)) Cast('Q');
+            if (Input.GetKeyDown(KeyCode.E)) Cast('E');
 
             Anim.MoveSpeed = move.magnitude * MoveSpeed;
             if (Time.time < dodgeUntil) return dodgeDir * (MoveSpeed * 2.4f);
@@ -216,7 +216,7 @@ namespace TremMasmorra.Game
             return slot == 'Q' ? cooldownQ / cooldownQMax : cooldownE / cooldownEMax;
         }
 
-        void TryCast(char slot)
+        public void Cast(char slot)
         {
             string id = slot == 'Q' ? Loadout.AbilityQ : Loadout.AbilityE;
             var ability = AbilityLibrary.Get(id);
