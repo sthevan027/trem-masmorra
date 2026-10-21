@@ -9,3 +9,4 @@ game/[Uu]ser[Ss]ettings/
 game/*.csproj
 game/*.sln
 game/*.slnx
+build/
