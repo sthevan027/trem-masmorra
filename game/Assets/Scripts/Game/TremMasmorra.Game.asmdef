@@ -1,0 +1,6 @@
+{
+  "name": "TremMasmorra.Game",
+  "rootNamespace": "TremMasmorra.Game",
+  "references": ["TremMasmorra.Core", "Unity.InputSystem", "Unity.TextMeshPro", "UnityEngine.UI"],
+  "autoReferenced": true
+}

@@ -1,0 +1,7 @@
+{
+  "name": "TremMasmorra.Core",
+  "rootNamespace": "TremMasmorra.Core",
+  "references": [],
+  "autoReferenced": true,
+  "noEngineReferences": true
+}
